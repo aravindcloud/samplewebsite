@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jasmine-node spec"
+    "test": "jasmine-node spec",
+    "build": "echo 'build script executed'" 
   },
   "author": "",
   "license": "ISC",
@@ -15,15 +16,4 @@
   "devDependencies": {
     "jasmine-node": "^1.14.5"
   }
-},
-{ 
- "name": "Example Application", 
- "version": "1.0.0", 
- "description": "", 
- "main": "app.js", 
- "scripts": { 
- 	"build": "echo 'build script executed'" 
- }, 
- "author": "", 
- "license": "ISC" 
-} 
+}
