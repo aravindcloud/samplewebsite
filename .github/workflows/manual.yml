@@ -1,0 +1,24 @@
+name: Show Me the S3cr3tz
+on: [push]
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up secret file
+      env:
+        DEBUG_HOST_KEY: ${{ secrets.HOST_DNS }}
+        DEBUG_USERNAME_KEY: ${{ secrets.USERNAME }}
+        DEBUG_TARGET_KEY: ${{ secrets.TARGET_DIR }}
+      run: |
+        echo $DEBUG_HOST_KEY >> secrets.txt
+        echo $DEBUG_USERNAME_KEY >> secrets.txt
+        echo $DEBUG_TARGET_KEY >> secrets.txt
+
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
