@@ -1,13 +1,23 @@
 version: 2
 jobs:
-    build:
-        docker:
-            - image: circleci/node:8
-        steps:
-            - checkout
-            - run:
-                name: install-dependencies
-                command: npm install
-            - run:
-                name: tests
-                command: npm build
+  build:
+docker:
+  - image: circleci/node:8.4.0
+
+working_directory: ~/app
+
+steps:
+  - checkout
+
+  - restore_cache:
+      keys:
+      - v1-dependencies-{{ checksum "app/package.json" }}
+
+  - run: cd app; npm install
+
+  - save_cache:
+      paths:
+        - app/node_modules
+      key: v1-dependencies-{{ checksum "app/package.json" }}
+
+  - run: cd app; npm run build; ls -l
