@@ -13,3 +13,14 @@ jobs:
           command: echo "testing"
       - run:
           command: node -v
+          
+       - restore_cache:
+          keys: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: 
+          command: npm install
+
+      - save_cache:
+          paths:
+            - app/node_modules
+          key: v1-dependencies-{{ "package.json" }}
