@@ -5,12 +5,24 @@ jobs:
   install-node-example:
     docker:
       - image: 'cimg/base:stable'
+    working_directory: ~/app
     steps:
       - checkout
       - node/install:
           install-yarn: true
           node-version: '10.19'
-      - run: node --version
+      - run:
+          name: Install Dependencies
+          command: npm install   
+      - run:
+          name: Build 
+          command: npm run build    
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh "$SSH_USER@$SSH_HOST" "mkdir -p /var/www/html/nodeapp"
+            ssh "$SSH_USER@$SSH_HOST" "rm -r /var/www/html/nodeapp/*"
+            scp -r ./* "$SSH_USER@$SSH_HOST:/var/www/html/nodeapp/"
 workflows:
   test_my_app:
     jobs:
