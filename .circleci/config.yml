@@ -1,21 +1,11 @@
-version: 2
+version: 2.1
+
 jobs:
-    build:
-        docker:
-            - image: circleci/node:8
-        working_directory: ~/app
+    machine:
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "app/package.json" }}
-
-      - run: cd app; npm install
-
-      - save_cache:
-          paths:
-            - app/node_modules
-          key: v1-dependencies-{{ checksum "app/package.json" }}
-
-      - run: cd app; npm run build; ls -l
+      - run:
+          command: echo "building"
+      - run:
+          command: echo "testing"
