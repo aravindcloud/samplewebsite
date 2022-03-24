@@ -9,3 +9,8 @@ jobs:
           install-yarn: true
           node-version: '10.19'
       - run: node --version
+      
+workflows:
+ test_my_app:
+   jobs:
+     - install-node-example
