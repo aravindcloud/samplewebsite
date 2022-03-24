@@ -12,27 +12,8 @@ jobs:
           command: npm install   
       - run:
           name: Build 
-          command: npm run build        
-  deploy:
-    machine:
-    steps:
-      - add_ssh_keys: # add private SSH key from CircleCI account based on fingerprint.
-          fingerprints:
-            - "6f:50:81:c2:3e:0e:d0:27:c4:27:86:bd:3f:27:12:60"
+          command: npm run build    
       - run:
           name: Deploy Over SSH
           command: |
-           ssh $SSH_USER@$SSH_HOST
-           cp * /var/www/
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: demo-node-proj
+            ssh "$SSH_USER@$SSH_HOST" "mkdir -p /var/www/html/occurrences"
