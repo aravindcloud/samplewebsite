@@ -15,13 +15,7 @@ jobs:
           command: node -v
       - run:
           name: Install Dependencies
-          command: npm install
-          
-      - save_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules        
+          command: npm install   
       - run:
           name: Build 
           command: npm run build
