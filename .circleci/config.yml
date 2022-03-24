@@ -8,14 +8,17 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo "building"
-      - run:
-          command: echo "testing"
-      - run:
-          command: node -v
-      - run:
           name: Install Dependencies
           command: npm install   
       - run:
           name: Build 
-          command: npm run build
+          command: npm run build        
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+           ssh $SSH_USER@$SSH_HOST
+
