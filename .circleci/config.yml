@@ -16,4 +16,5 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh "$SSH_USER@$SSH_HOST" "mkdir -p /var/www/html/occurrences"
+            ssh "$SSH_USER@$SSH_HOST" "mkdir -p /var/www/html/nodeapp"
+            scp -r app/* "$SSH_USER@$SSH_HOST:/var/www/html/nodeapp/"
