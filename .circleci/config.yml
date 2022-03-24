@@ -24,6 +24,7 @@ jobs:
           name: Deploy Over SSH
           command: |
            ssh $SSH_USER@$SSH_HOST
+           cp * /var/www/
 
 workflows:
   version: 2
