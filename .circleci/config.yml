@@ -13,11 +13,6 @@ jobs:
           command: echo "testing"
       - run:
           command: node -v
-          
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
-            - v1-npm-deps-
       - run:
           name: Install Dependencies
           command: npm install
@@ -25,10 +20,8 @@ jobs:
       - save_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
           paths:
-            - ./node_modules
-            
+            - ./node_modules        
       - run:
           name: Build 
           command: npm run build
