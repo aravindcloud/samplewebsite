@@ -1,20 +1,11 @@
 version: 2.1
 jobs:
-  build:
-    machine:
-      image: ubuntu-2004:current
-    resource_class: medium
-    working_directory: ~/app
+  install-node-example:
+    docker:
+      - image: 'cimg/base:stable'
     steps:
       - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install   
-      - run:
-          name: Build 
-          command: npm run build    
-      - run:
-          name: Deploy Over SSH
-          command: |
-            ssh "$SSH_USER@$SSH_HOST" "mkdir -p /var/www/html/nodeapp"
-            scp -r ./* "$SSH_USER@$SSH_HOST:/var/www/html/nodeapp/"
+      - node/install:
+          install-yarn: true
+          node-version: '10.19'
+      - run: node --version
