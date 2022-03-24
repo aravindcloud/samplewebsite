@@ -4,9 +4,12 @@ jobs:
     machine:
       image: ubuntu-2004:current
     resource_class: medium
+    working_directory: ~/app
     steps:
       - checkout
       - run:
           command: echo "building"
       - run:
           command: echo "testing"
+      - run:
+          command: ls -l
